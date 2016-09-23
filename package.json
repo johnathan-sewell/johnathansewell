@@ -8,13 +8,16 @@
     "sass": "sass sass/style.scss build/style.css",
     "sass--watch": "sass --watch sass/style.scss:build/style.css",
     "build": "npm run sass",
-    "dev": "concurrently 'npm run sass--watch' 'static'"
+    "browser-sync": "browser-sync start --server --files 'build' '*.html'",
+    "server": "static",
+    "dev": "concurrently 'npm run sass--watch' 'npm run browser-sync'"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jonathansewell/johnathansewell.git"
   },
   "devDependencies": {
+    "browser-sync": "2.16.0",
     "concurrently": "2.2.0",
     "node-static": "0.7.8"
   }

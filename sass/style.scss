@@ -1,13 +1,58 @@
 @import 'colours';
 @import 'https://fonts.googleapis.com/css?family=Open+Sans';
 
+* {
+  box-sizing: border-box;
+}
 body {
   font-size: 20px;
   font-family: 'Open Sans', sans-serif;
   line-height: 1.7em;
+  margin: 0;
+  padding: 0;
+  color: #4d5659;
 }
-header {
-  margin: 1em;
-  font-family: 'Open Sans', sans-serif;
-  
+
+h1, h2, h3, h4, h5, h6 {
+  color: #000;
+}
+
+article {
+  max-width: 900px;
+  padding: 1em;
+}
+
+.blog-header {
+  background-color: #222;
+  padding: 1em;
+  font-family: sans-serif;
+  box-shadow: 0 0 .1em #000; // offset-x | offset-y | blur-radius | color
+
+  .blog-header__heading {
+    color: #fff;
+    font-weight: 100;
+    font-size: 2em;
+    margin-top: .5em;
+    margin-bottom: .1em;
+  }
+  .blog-header__tagline {
+    color: #fff;
+    font-weight: 100;
+    font-style: italic;
+    margin-top: 0;
+  }
+}
+time {
+  font-style: italic;
+  font-size: .8em;
+}
+.post-list {
+  .post-list__heading {
+    margin: 1em;
+  }
+  .post-list__list {
+    li {
+      margin-bottom: .5em;
+    }
+  }
 }

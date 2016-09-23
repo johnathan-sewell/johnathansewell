@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 
-	var nextSlideKeys = [],
-		previousSlideKeys = [],
-		pages = [
+	var nextSlideKeys = [];
+	var previousSlideKeys = [];
+	var pages = [
 			'index.html',
 			'data.html',
 			'layout.html',
@@ -26,7 +26,9 @@
 		];
 
 	nextSlideKeys.push(32); //space bar
-	nextSlideKeys.push(13); //return
+  nextSlideKeys.push(13); //return
+	nextSlideKeys.push(39); //right cursor key
+  previousSlideKeys.push(8) //backspace
 
 	document.onkeyup = function(e) {
 		e = e || window.event;
