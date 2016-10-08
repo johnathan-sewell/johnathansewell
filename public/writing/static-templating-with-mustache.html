@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Johnathan Sewell</title>
+
+    <link href="/style.css" rel="stylesheet">
+
+    <script async src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-84995112-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</head>
+<body>
+  <header class="blog-header">
+      <h1 class="blog-header__heading"><a href="/">Hi, I'm Johnathan Sewell</a></h1>
+      <p class="blog-header__tagline">Software Engineer &amp; JavaScript Developer</p>
+  </header>
+<article>
+  <h1>Using NPM scripts to statically generate this site</h1>
+
+  <p>
+    <time datetime="2016-09-29">29th September 2016</time>
+  </p>
+
+  <p>
+    This blog is hosted in an AWS S3 bucket... the simplicity of a static site is appealing. I'm basically serving HTML, creating and hosting for example an Express.js app for this is just unnecessary.
+  </p>
+
+  <p>
+    So this site started out as a few html pages, no shared master template or partial templates. But once I'd copy/pasted the same blocks of markup a couple of times, I really had to do something about the repetition. Instead of using Jekyll and the (I presume) kitchen sink that comes with it, I thought I'd try out <a href="https://github.com/janl/mustache.js#command-line-tool">mustache.js and it's CLI</a>. I'm sure there's a better way to do this, but I wanted to see where this road would lead.
+  </p>
+
+  <p>
+    I started off adding an <a href="https://docs.npmjs.com/cli/run-script">NPM script to package.json</a> to output an index.html page from a template and a partial.
+  </p>
+
+<pre class="code prettyprint">
+"scripts": {
+  "mustache": "mustache -p templates/partials/page-head.template templates/data/empty.json templates/index.template > public/index.html"
+}
+</pre>
+
+  <p>
+    That's sort of nice, but it's going to get out of hand pretty quickly as I add more pages and partials.
+  </p>
+
+  <p>
+    So I put it in a separate bash script, to avoid bloating the package.json file.
+  </p>
+
+<pre class="code prettyprint">
+"scripts": {
+  "template": "./bin/build-templates.sh"
+}
+</pre>
+    
+<pre class="code prettyprint">
+#!/bin/bash
+set -o errexit # Exit on error
+$(npm bin)/mustache -p templates/partials/page-head.template templates/data/empty.json templates/index.template > public/index.html
+</pre>
+
+  <p>
+    But I'm going to forget to update that when I write a new post... Next idea: write a Node script to do the heavy file work for me... read in all the templates in a folder and build them!
+  </p>
+
+<pre class="code prettyprint">
+"scripts": {
+  "template": "./bin/template.js"
+}
+</pre>
+
+  <p>
+    Notice I didn't write <strong>node ./bin/template.js</strong>, since the script has a hashbang <strong>#! /usr/bin/env node</strong> it'll be run by Node automatically. If you try this on Windows it probably won't work. My Node script reads in all the filenames of the partials in /templates/partials/ and turns them into arguments that the Mustache CLI can use. Next it reads in all the blog post templates, and executes the Mustache CLI command to output the final HTML file.
+  </p>
+
+<pre class="code prettyprint">
+#! /usr/bin/env node
+const fs = require('fs');
+const shell = require('shelljs');
+
+const partialsArgs = fs.readdirSync('./templates/partials/')
+.filter(f => f.endsWith('.template'))
+.reduce((args, partial) => `${args} -p templates/partials/${partial}`, '');
+
+fs.readdirSync('./templates/')
+.filter(filePath => filePath.endsWith('.template'))
+.forEach((templatePath) => {
+  const templateName = templatePath.substring(0, templatePath.lastIndexOf('.template'));
+  const outputDir = templateName === 'index' ? 'public/' : 'public/writing/';
+  const command = `$(npm bin)/mustache ${partialsArgs} templates/data/empty.json templates/${templatePath} > ${outputDir}/${templateName}.html`;
+  console.log(command); // eslint-disable-line no-console
+  shell.exec(command);
+});
+</pre>
+
+  <p>
+  With the <a href="https://www.npmjs.com/package/watch">watch</a> and <a href="https://www.npmjs.com/package/browser-sync">browser-sync</a> modules, I can make a change to a template or partial and have the site rebuilt and reloaded in the browser automatically. I'm also using <a href="https://www.npmjs.com/package/concurrently">concurrently</a> to run npm scripts in parallel.
+  </p>
+
+<pre class="code prettyprint">
+"scripts": {
+  "dev": "concurrently 'npm run watch-templates' 'npm run browser-sync'",
+  "watch-templates": "watch 'npm run template' ./templates",
+  "template": "./bin/template.js",
+  "browser-sync": "browser-sync start --server 'public' --files './public'"
+}    
+</pre>
+
+  <p>
+    Unfortunately the Node script runs the Mustache command for every page, which triggers browserSync to reload the site for every page... something to fix later.
+  </p>
+
+  <p>
+    Writing custom Node scripts and combining them with the huge number of NPM modules available creates a really easy and powerful system for customising your build and coding workflow.
+  </p>
+</article>
+</body>
+</html>

@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Johnathan Sewell</title>
-  <link href="/build/style.css" rel="stylesheet">
-</head>
-
-<body>
-  <header class="blog-header blog-header--article">
-      <h1 class="blog-header__heading"><a href="/">Hi, I'm Johnathan Sewell</a></h1>
-      <p class="blog-header__tagline">Software Engineer &amp; JavaScript Developer</p>
-  </header>
-
+{{> page-start.template}}
+{{> header.template}}
   <article>
     <h1>An Experiment in Single Batch Working</h1>
 
@@ -70,7 +55,7 @@
     <p>Next, in the "ideate" phase we all spent 30 minutes sketching as many ideas onto paper as we could. We discussed and explained our sketches to each other and talked about the minimal behaviour we could build to satisfy the story.</p>
 
     <p>
-      <img src="sketches.jpg">
+      <img src="/images/single-batch-day/sketches.jpg">
       <br/><span style="font-style:italic">A selection of our sketches</span>
     </p>
 
@@ -81,7 +66,10 @@
 
     <h2>Results</h2>
     <p>This was probably the smoothest task we have completed as a team. We had asked all the right questions, identified the core goals up-front. We built a solid <strong>shared understanding</strong> of what it was we were building, and most importantly,
-      <strong>why</strong> we were building it. Communication was so much easier when everybody understood what everyone else was doing.</p>
+      <strong>why</strong> we were building it. Communication was so much easier when everybody understood what everyone else was doing.
+    </p>
+{{> page-end.template}}
+
 
     <p>At the end of this sprint we <strong>delivered the finished feature</strong>.</p>
 
@@ -95,6 +83,4 @@
 
     <p>Working on a single feature or theme lowers the overhead of work-in-progress and brings out the power of the team working collectively. Going back to the film crew analogy... that’s exactly how I imagine a film crew should work.</p>
   </article>
-</body>
-
-</html>
+{{> page-end.template}}

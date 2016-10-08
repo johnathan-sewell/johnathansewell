@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "sass sass/style.scss build/style.css",
-    "sass--watch": "sass --watch sass/style.scss:build/style.css",
-    "build": "npm run sass",
-    "browser-sync": "browser-sync start --server --files 'build' '*.html'",
-    "server": "static",
-    "dev": "concurrently 'npm run sass--watch' 'npm run browser-sync'"
+    "sass": "sass sass/style.scss public/style.css",
+    "sass--watch": "sass --watch sass/style.scss:public/style.css",
+    "build": "concurrently 'npm run sass' 'npm run template'",
+    "browser-sync": "browser-sync start --server 'public' --files './public'",
+    "static": "static './public'",
+    "template": "./bin/template.js",
+    "watch-templates": "watch 'npm run template' ./templates",
+    "dev": "concurrently 'npm run watch-templates' 'npm run sass--watch' 'npm run static'"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,12 @@
   "devDependencies": {
     "browser-sync": "2.16.0",
     "concurrently": "2.2.0",
-    "node-static": "0.7.8"
+    "eslint": "3.7.0",
+    "eslint-config-airbnb": "12.0.0",
+    "mustache": "2.2.1",
+    "watch": "0.19.2"
+  },
+  "dependencies": {
+    "shelljs": "0.7.4"
   }
 }

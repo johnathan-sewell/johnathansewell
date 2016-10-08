@@ -1,0 +1,4 @@
+  <header class="blog-header">
+      <h1 class="blog-header__heading"><a href="/">Hi, I'm Johnathan Sewell</a></h1>
+      <p class="blog-header__tagline">Software Engineer &amp; JavaScript Developer</p>
+  </header>
