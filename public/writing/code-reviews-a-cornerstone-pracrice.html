@@ -23,6 +23,10 @@
   <header class="blog-header">
       <h1 class="blog-header__heading"><a href="/">Hi, I'm Johnathan Sewell</a></h1>
       <p class="blog-header__tagline">Software Engineer &amp; JavaScript Developer</p>
+      <nav class="social-links">
+        <a href="https://twitter.com/jonathansewell">Twitter</a>
+        <a href="http://www.linkedin.com/in/johnathan-sewell">LinkedIn</a>
+      </nav>
   </header>
 <article>
 
@@ -34,15 +38,15 @@
 </header>
 
   <p>
-    Since moving to Copenhagen earlier this year I've been working for a (large and successful) digital agency. I was shocked to find they didn't do code reviews. I truly (naively) believed that in 2016 every development team had some form of code review process.
+    Since moving to Copenhagen earlier this year I've been working for a (large and successful) digital agency. I was very surprised to find they didn't do regular code reviews. I truly (naively) believed that every development team had to be doing some form of peer code review.
   </p>
 
   <p>
-    It didn't seem like a concious decision either, some of the answers to my questions on the lack of reviews were telling:  
+    The lack of process didn't seem like a concious decision either, some of the answers to my questions on the lack of reviews were telling:  
   </p>
 
   <blockquote>
-    The developers on this team are <em>professionals</em>, they don't need their work to be checked
+    The developers on this team are <em>very experienced</em>, they don't need their work to be checked
   </blockquote>
 
   <blockquote>
@@ -55,55 +59,55 @@
 
   <h2>Agency Time-Centric Culture</h2>
   <p>
-    Having worked in a SaaS startup for 4 years prior, the heavy burden of time tracking in agencies came as a surprise. Having to track time to some degree is understandable, since agencies sell time to their clients. And I think some SaaS companies could be more aware of time. But I suspect agency time-centric culture makes it difficult for practices like code reviews to survive.
-  </p>
-  <p>
-    When you have to log every hour of your day to a client invoice, it's hard to justify spending an hour helping another "consultant" make their code more robust. Project managers love developers who burn through their work fast and have time to spare. Unfortunately they don't have much visibility of the underlying <em>quality</em> of the solutions being built, or the long term effects of poor solutions on a project. I think this should change.
+    Having to track time is completely understandable, since agencies sell time to their clients. And I think SaaS companies should also be very aware of where time is being spent. But I've seen projects that put a heavy burden of time tracking on engineers, and I suspect this makes it difficult for practices like code reviews to survive. When you have to log every hour of your day to a client invoice, it's difficult to justify spending an hour looking at code that someone else has already written!
   </p>
 
-  <h2>Code Reviews can be a Cornerstone of a Great Team</h2>
+  <h2>But Code Reviews are a Cornerstone of Great Teams</h2>
   <p>
-    There are so many benefits to a good code review process that I say they are a cornerstone practice for great teams. I'm not going to prescribe a process, but in my experience it should be one the whole team agrees on, and one which <strong>requires everybody to put their code through a review</strong> before it gets deployed.
+    There are so many benefits to a good code review process, they are a cornerstone practice for great teams. In my experience the exact code review process should be one the whole team agrees on, and one which <strong>requires everybody to put their code through a review</strong> before it gets deployed.
   </p>
 
   <p>
-    Code reviews improve code quality AND the performance of the team. I'll explain why.
+    Code reviews <strong>improve code quality</strong> AND the <strong>performance of the team</strong>. I'll explain why.
   </p>
 
-  <h2>Code Quality</h2>
+  <h2>Code Reviews improve Code Quality</h2>
   <p>
-    <strong>Reduce Bugs:</strong> Code reviews help catch bugs early. Bugs are cheaper to fix earlier, so that's great. You will also catch bugs get through your QA process, like subtle memory leaks that slow down your app after it's been running in the browser for an hour.
+    <strong>Reduce Bugs.</strong> Code reviews help catch bugs early. Bugs are cheaper to fix at this early stage. You will also catch bugs that get through your QA process, like subtle memory leaks that slow down your app after an arbitrary time.
   </p>
   <p>
-    <strong>Quality Incentive:</strong> Knowing that your code will be reviewed by someone on your team gives you some extra incentive to do things right and not cut corners.
+    <strong>Add a Quality Incentive.</strong> Knowing that your code will be reviewed by someone on your team gives you some extra incentive to do things right and not cut corners.
   </p>
   <p>
-    <strong>Prevent Bad Practice:</strong> Reviews help keep bad practices out of the code. Bad practices spread, developers love to reuse code and techniques. And <a href="https://pragprog.com/the-pragmatic-programmer/extracts/software-entropy">the broken window effect</a> means that developers lose respect for poorly maintained code and start to write poor code in response. Code reviews can also reduce existing code smells by stopping their reuse, and encouraging them to be refactored as part of other work.
+    <strong>Stamp out Bad Practices.</strong> Reviews help keep bad practices out of the code. Bad practices spread, engineers love to reuse code and techniques. And <a href="https://pragprog.com/the-pragmatic-programmer/extracts/software-entropy">the broken window effect</a> means that engineers lose respect for poorly maintained code and start to write poor code in response. Code reviews can also reduce existing bad code by encouraging refactoring as part of related work. The opposite is true for good practices and smart solutions, these are more visible to the rest of the team and more likely to be reused.
   </p>
   <p>
-    <strong>Quality increases Speed:</strong> Why care about code quality, especially in an agency where you just need to get something that works out the door? Well, one of the ways teams can move faster is by having well-engineered and well-maintained code, it makes it quicker to refactor to fit in new features, and it reduces bug counts and fix time. So the project could be delivered faster, with less bugs, and be in great shape for another phase of work.
+    <strong>Increase Development Speed.</strong> Why care about code quality, especially in an agency where you just need to get something that works out the door? Well, one of the ways teams can move faster is by having well-engineered and well-maintained code, it makes it quicker to refactor to fit in new features, and it reduces bug counts and fix time. So the project could be delivered faster, with less bugs, and be in great shape for another phase of work.
   </p>
 
-  <h2>Developer Engagement</h2>
+  <h2>Code Reviews improve Developer Engagement</h2>
   <p>
-    To me this is the most important factor. Any company that build software needs good software engineers, code reviews can help to keep your great developers happy, and help to improve the rest of us.
+    To me this is the most important factor. Any company that build software as a business needs good engineers, code reviews can help to keep your great engineers happy, and help to improve the rest of the team.
   </p>
   <p>
-    <strong>Learning:</strong> When we get comments out of code reviews we're being given new knowlegde, and we're sharing our knowledge with the team through our code. We're helping new developers align with the team, and giving them an opportunity to share fresh skills. Constant learning is a big part of the appeal of being a developer, without it work becomes boring. And <a href="http://randsinrepose.com/archives/bored-people-quit/">bored people quit</a>.
+    <strong>Learn More.</strong> When someone suggests a better way to do something we're learning, when we look at how other engineers have approached something, we're learning. Code reviews naturally involve knowledge sharing. We're also helping new engineers align with the team, and giving them a platform to share and discuss fresh perspectives. Constant learning is a big part of the appeal of being a developer, without it work becomes boring and <a href="http://randsinrepose.com/archives/bored-people-quit/">bored people quit</a>.
   </p>
   <p>
-    <strong>Less Dependency on Individuals:</strong> We're reducing dependency on individuals, exposure to each others' work means it's easier to pick up where others left off.
+    <strong>Rely Less on Individuals.</strong> We're reducing dependency on individuals, because exposure to each others' work means it's easier to pick up where others left off. So people can move around, do different things, take time off, without a major impact on projects.
   </p>
   <p>
-    <strong>Cohesion:</strong> There are opportunities for better team cohesion, discussions on code reviews get people helping each other achieve their objectives
+    <strong>Make the Team more Cohesive.</strong> Discussions on code reviews get people talking and finding concensus (hopefully).
   </p>
   <p>
-    <strong>Engagement:</strong> Lastly and <strong>most importantly</strong>, developer engagement is affected by the projects we work on. Good developers care about working on a well-maintained project, having other developers cutting corners and adding poor quality code is only going to make your best developers unhappy. For a software company, having unhappy developers is a gigantic problem.
+    <strong>Make Engineers Happy.</strong> Lastly and <strong>most importantly</strong>, developer engagement is affected by the projects we work on. Good engineers care about working on a well-maintained project that provides a sense of achievement, having other engineers cutting corners and adding poor quality code is only going to make your best engineers unhappy. For a software company, having unhappy engineers is a gigantic problem.
+  </p>
+
+  <p>
+    Needless to say I've introduced code reviews to my current team, and everyone is on board with it! Having a flexible process has helped, and the code review tools provided by Github are invaluable!
   </p>
 </article>
 <footer class="article-footer">
-  If you have any comments about my musings I'm on <a href="https://twitter.com/jonathansewell">Twitter</a> and <a href="www.linkedin.com/in/johnathan-sewell
-  ">LinkedIn</a>. I'd love to hear them!
+  If you have any comments about my writing here please find me on <a href="https://twitter.com/jonathansewell">Twitter</a>, I'd love to hear them!
 </header>
 </body>
 </html>

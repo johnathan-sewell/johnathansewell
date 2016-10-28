@@ -2,6 +2,17 @@
 const fs = require('fs');
 const shell = require('shelljs');
 
+// const watchPath = process.argv[2];
+// console.log(watchPath);
+// if (watchPath) {
+//   fs.watch(watchPath, { recursive: true }, (eventType, filename) => {
+//     if (filename) {
+//       console.log(filename);
+//     }
+//   });
+// }
+
+
 const partialsArgs = fs.readdirSync('./templates/partials/')
   .filter(f => f.endsWith('.template'))
   .reduce((args, partial) => `${args} -p templates/partials/${partial}`, '');

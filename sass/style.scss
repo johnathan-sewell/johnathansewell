@@ -80,7 +80,15 @@ time {
     }
   }
 }
-
+.social-links {
+    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    font-size: .8em;
+    font-weight: 100;
+}
 .article-footer {
   max-width: 950px;
   margin: 1em auto;
