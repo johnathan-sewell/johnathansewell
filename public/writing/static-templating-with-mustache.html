@@ -32,15 +32,11 @@
   </p>
 
   <p>
-    This blog is hosted in an AWS S3 bucket... the simplicity of a static site is appealing. I'm basically serving HTML, creating and hosting for example an Express.js app for this is just unnecessary.
+    So this blog started out as a few html pages, no shared master template or partial templates. But once I'd copy/pasted the same blocks of markup a couple of times, I wanted to do something about the repetition. Instead of using Jekyll, I thought I'd try out <a href="https://github.com/janl/mustache.js#command-line-tool">mustache.js and it's CLI</a>. I'm sure there's a better way to do this, but I wanted to see where this road would lead.
   </p>
 
   <p>
-    So this site started out as a few html pages, no shared master template or partial templates. But once I'd copy/pasted the same blocks of markup a couple of times, I really had to do something about the repetition. Instead of using Jekyll and the (I presume) kitchen sink that comes with it, I thought I'd try out <a href="https://github.com/janl/mustache.js#command-line-tool">mustache.js and it's CLI</a>. I'm sure there's a better way to do this, but I wanted to see where this road would lead.
-  </p>
-
-  <p>
-    I started off adding an <a href="https://docs.npmjs.com/cli/run-script">NPM script to package.json</a> to output an index.html page from a template and a partial.
+    I started off adding an NPM script to output an index.html page from a template, (an empty JSON file) and a partial.
   </p>
 
 <pre class="code prettyprint">
@@ -49,28 +45,10 @@
 }
 </pre>
 
-  <p>
-    That's sort of nice, but it's going to get out of hand pretty quickly as I add more pages and partials.
-  </p>
+<p>That's pretty powerful, I can now use shared partials in each blog article.</p>
 
   <p>
-    So I put it in a separate bash script, to avoid bloating the package.json file.
-  </p>
-
-<pre class="code prettyprint">
-"scripts": {
-  "template": "./bin/build-templates.sh"
-}
-</pre>
-    
-<pre class="code prettyprint">
-#!/bin/bash
-set -o errexit # Exit on error
-$(npm bin)/mustache -p templates/partials/page-head.template templates/data/empty.json templates/index.template > public/index.html
-</pre>
-
-  <p>
-    But I'm going to forget to update that when I write a new post... Next idea: write a Node script to do the heavy file work for me... read in all the templates in a folder and build them!
+    With this I have to remember to add a file name to that script when I write a new post... another idea is to write a Node script to read in all the templates in a folder and build them.
   </p>
 
 <pre class="code prettyprint">
@@ -80,7 +58,7 @@ $(npm bin)/mustache -p templates/partials/page-head.template templates/data/empt
 </pre>
 
   <p>
-    Notice I didn't write <strong>node ./bin/template.js</strong>, since the script has a hashbang <strong>#! /usr/bin/env node</strong> it'll be run by Node automatically. If you try this on Windows it probably won't work. My Node script reads in all the filenames of the partials in /templates/partials/ and turns them into arguments that the Mustache CLI can use. Next it reads in all the blog post templates, and executes the Mustache CLI command to output the final HTML file.
+    Side note: I didn't have to write <strong>node ./bin/template.js</strong>, since the script has a hashbang <strong>#! /usr/bin/env node</strong> it'll be run by Node automatically. The script reads in all the filenames of the partials in /templates/partials/ and turns them into arguments that the Mustache CLI can use. Next it reads in all the blog post templates, and executes the Mustache CLI command to output the final HTML files in a folder ready to be deployed.
   </p>
 
 <pre class="code prettyprint">
@@ -113,16 +91,9 @@ fs.readdirSync('./templates/')
   "watch-templates": "watch 'npm run template' ./templates",
   "template": "./bin/template.js",
   "browser-sync": "browser-sync start --server 'public' --files './public'"
-}    
+}
 </pre>
 
-  <p>
-    Unfortunately the Node script runs the Mustache command for every page, which triggers browserSync to reload the site for every page... something to fix later.
-  </p>
-
-  <p>
-    Writing custom Node scripts and combining them with the huge number of NPM modules available creates a really easy and powerful system for customising your build and coding workflow.
-  </p>
 </article>
 </body>
 </html>
