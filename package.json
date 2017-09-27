@@ -12,7 +12,7 @@
     "template": "./bin/template.js",
     "watch-templates": "watch 'npm run template' ./templates",
     "dev": "concurrently 'npm run watch-templates' 'npm run sass--watch' 'npm run static'",
-    "deploy": "aws s3 cp public s3://johnathansewell.me/ --recursive"
+    "deploy": "npm run build && aws s3 cp public s3://johnathansewell.me/ --recursive"
   },
   "repository": {
     "type": "git",

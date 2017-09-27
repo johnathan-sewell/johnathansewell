@@ -24,7 +24,7 @@
       <time datetime="2014-01-24">24th January 2014</time>
     </li>
     <li>
-      D3.js experiments (gone wrong) 
+      D3.js experiments
       <a href="/experiments/basic-force-layout/">Basic Force Layout</a>/
       <a href="experiments/d3-topic-experiments/force-directed.html">Force-directed</a>/
       <a href="/experiments/d3-topic-experiments/force-directed-topics.html">Force-directed topics</a>/
